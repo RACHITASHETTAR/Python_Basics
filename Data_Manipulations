@@ -143,7 +143,7 @@ Numpy arrays:
 --------------------------
 numpy arrays :
 - has more built-in functionality compared to python list
-- numpy array make working with huge multi-dimensional data set easier with few syntax
+- numpy array makes working with huge multi-dimensional data set easier with few syntax.
 - numpy arrays are also more efficient than python lists in terms of memory consumption and speed.
 -----------------------------------------
 To create 1D numpy array: using .array function
@@ -154,26 +154,44 @@ To create 1D numpy array: using .array function
 -----------------------------
 eg: To create numpy array use python list or tuple.:
 ----------------------
-1D array: is using 1demnsional array which has either python list or python tuple.
+1D array: is using 1D dimnsional array which has either python list or python tuple.
 import numpy as np
 oneDarray = np.array([1,2,3,4])
 print(oneDarray)
+print(oneDarray.shape)
 print(oneDarray.ndim)
 -------------------------------
 2D array: stacking more than one 1D array is called 1Dimensional array
 import numpy as np
 twoDarray = np.array([[1,2,3,4],[5,6,7,8]])
 print(twoDarray)
+print(twoDarray.shape)
 print(twoDarray.ndim)
 ---------------------------------------------
 3D array: stacking two or more 2Dimensional array is called 3D array
 import numpy as np
 threeDarray = np.array([[[1,2,3,4],[5,6,7,8]], [[1,2,3,4],[5,6,7,8]]])
 print(threeDarray)
+print(threeDarray.shape)
 print(threeDarray.ndim)
+-----------------------
+np.ones((2,4))
+np.ones((2,4), dtype=numpy.int_)
+np.zeros((3,6))
+np.random.random((6,4))
+--to print numbers 10,15,20,25...100
+np.arange(10,100,5)--(start,end,increment by 5)
 -------------------------------------------------
 how many dimension in this array [[[1,2,3,4]]] is a 3D array.
 --------------------------------------------------------------
 Indexing Numpy array:
 -------------------------
 
+import numpy as np
+ary1=[1,2,3,4,5]
+ary2=[5,6,7,8,9]
+ary1+ary2
+ary1-ary2
+ary1*ary2
+ary1/ary2
+-------------------------------------------------------
