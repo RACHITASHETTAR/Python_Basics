@@ -78,8 +78,13 @@ print(age)
 print(country)
 -------------------------------------------
 data = {"Name":"james", "age":"32","country":"USA"}
+To fetch the keys from the dictonary using the for loop
 for key in data:
----------------
+  print(data[key])
+---------------------
+for value in data:
+  print(data[value])
+--------------------------------------------------------------------------
 Tuples: can be indexing done same as list, tuples can be sliced same as list.
 tup = ("rose","lilly","jasmine")
 tup1 = tup[1:3]
@@ -88,6 +93,40 @@ tup1 = tup[0:2]
 print(tup1)  ('lilly', 'jasmine')
 print(tup2)  ('rose', 'lilly', 'jasmine')
 print(tup3)  ('rose', 'lilly')
+-----------------------------------------------
+Series is one dimensional data structure 1d array shape:(4,)
+dataframe is two dimensional data structure, 2d array shape:(2,3)
+3D array shape:(4,3,2)
+------------
+Numpy: is numerical python,
+it provide the data structure called numpy array,which grid of values.
+it also provides collection of high-level mathematical functions which can be performed on multidimensional numpy arrays.
+-----------------------------------------------
+Numpy: python library for Data Science
+- used for scientific computations,
+- provides numpy arrays which can be multidimensional
+- numpy used for mathematical computations
+----------------------------------
+Pandas: python library for Data Science.
+- used for data manipulation like storing,cleaning,exploring,processing data.
+-two data structures: Series and Dataframe
+----------------------------------------------
+matplotlib: used for plotting the graphs.
+it create the graphs: line graph, bar graph,scatter plot, bar graph, area plot, pie plot.
+----------------------------
+-Sea born: is a visualization python lib built on top of a matplotlib
+-it extends the functionality of matplotlib and allows creating a variety of different graphs with fewer syntax.
+--------------------------------------------------------------
+Numpy arrays:
+- numpy array is called ndarray
+- numpy array has multidimensional data structure designed to handle large data sets.
+-To find how many dimension in numpy array use: .ndim
+--------------------------
+numpy arrays :
+- has more built in functionality compared to python list
+- numpy array make working with huge multi-dimensionaldata set easier with few syntax
+- numpy arrays are also more efficient than python lists in terms of memory consumption and speed.
+-----------------------------------------
 
 
 
