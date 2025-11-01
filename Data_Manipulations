@@ -129,8 +129,8 @@ numpy arrays :
 -----------------------------------------
 To create 1D numpy array: using .array function
 - 1D numpy array is where each element of outer most array is 0D array(scalar)
-- to create numpy array  using array() function in numpy library.
-- to create numpy array using either python  lists or tuples.
+- to create numpy array using array() function in numpy library.
+- to create numpy array using either python lists or tuples.
 - to create 1d numpy array we create 1d python lists or tuple to the array() function
 -----------------------------
 eg: To create numpy array use python list or tuple.:
@@ -140,11 +140,16 @@ oneDarray = np.array([1,2,3,4])
 print(oneDarray)
 print(oneDarray.ndim)
 -------------------------------
+2D array: stacking more than one 1D array is called 1Dimensional array
 import numpy as np
 twoDarray = np.array([[1,2,3,4],[5,6,7,8]])
 print(twoDarray)
 print(twoDarray.ndim)
 ---------------------------------------------
-
+3D array: stacking two or more 2Dimensional array is called 3D array
+import numpy as np
+threeDarray = np.array([[[1,2,3,4],[5,6,7,8]], [[1,2,3,4],[5,6,7,8]]])
+print(threeDarray)
+print(threeDarray.ndim)
 
 
