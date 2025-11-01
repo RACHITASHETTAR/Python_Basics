@@ -117,6 +117,25 @@ it create the graphs: line graph, bar graph,scatter plot, bar graph, area plot, 
 -Sea born: is a visualization python lib built on top of a matplotlib
 -it extends the functionality of matplotlib and allows creating a variety of different graphs with fewer syntax.
 --------------------------------------------------------------
+List concatination:
+----------------------
+lst1 =[1,2,3,4]
+lst2 =[4,5,6,7]
+list=lst1+lst2
+print(list)
+[1, 2, 3, 4, 4, 5, 6, 7]
+----------------------
+list addition:
+----------------
+now lenght of last1 is len(last1) is 4
+result =[]
+lst1 =[1,2,3,4]
+lst2 =[4,5,6,7]
+length = len(lst1)
+for i in range (length):
+  result.append(lst1[i]+lst2[i])
+------------------------------------
+list concatination: two list 
 Numpy arrays:
 - numpy array is called ndarray
 - numpy array has multidimensional data structure designed to handle large data sets.
@@ -135,6 +154,7 @@ To create 1D numpy array: using .array function
 -----------------------------
 eg: To create numpy array use python list or tuple.:
 ----------------------
+1D array: is using 1demnsional array which has either python list or python tuple.
 import numpy as np
 oneDarray = np.array([1,2,3,4])
 print(oneDarray)
@@ -152,4 +172,8 @@ threeDarray = np.array([[[1,2,3,4],[5,6,7,8]], [[1,2,3,4],[5,6,7,8]]])
 print(threeDarray)
 print(threeDarray.ndim)
 -------------------------------------------------
+how many dimension in this array [[[1,2,3,4]]] is a 3D array.
+--------------------------------------------------------------
+Indexing Numpy array:
+-------------------------
 
