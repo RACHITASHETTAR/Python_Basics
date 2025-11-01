@@ -123,10 +123,28 @@ Numpy arrays:
 -To find how many dimension in numpy array use: .ndim
 --------------------------
 numpy arrays :
-- has more built in functionality compared to python list
-- numpy array make working with huge multi-dimensionaldata set easier with few syntax
+- has more built-in functionality compared to python list
+- numpy array make working with huge multi-dimensional data set easier with few syntax
 - numpy arrays are also more efficient than python lists in terms of memory consumption and speed.
 -----------------------------------------
+To create 1D numpy array: using .array function
+- 1D numpy array is where each element of outer most array is 0D array(scalar)
+- to create numpy array  using array() function in numpy library.
+- to create numpy array using either python  lists or tuples.
+- to create 1d numpy array we create 1d python lists or tuple to the array() function
+-----------------------------
+eg: To create numpy array use python list or tuple.:
+----------------------
+import numpy as np
+oneDarray = np.array([1,2,3,4])
+print(oneDarray)
+print(oneDarray.ndim)
+-------------------------------
+import numpy as np
+twoDarray = np.array([[1,2,3,4],[5,6,7,8]])
+print(twoDarray)
+print(twoDarray.ndim)
+---------------------------------------------
 
 
 
