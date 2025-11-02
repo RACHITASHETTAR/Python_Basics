@@ -180,9 +180,17 @@ np.ones((2,4), dtype=numpy.int_)
 np.zeros((3,6))
 np.random.random((6,4))
 --to print numbers 10,15,20,25...100
-np.arange(10,100,5)--(start,end,increment by 5)
+np.arange(10,101,5)--(start,end,increment by 5) last number is exclusive need to use 101
+np.arange(0,24)
+np.arange(2,12)
+np.reshape(2,12)
 -------------------------------------------------
-how many dimension in this array [[[1,2,3,4]]] is a 3D array.
+how many dimension in this array, x= [[[1,2,3,4]]] its is a 3D array.
+for above x what x[0,0,0] returns?
+ans: it returns: 2d-array, 1d-array, first element in the array.
+4D array:
+ary1.reshape(2,2,2,3)
+ary1.reshape(4,3,2)
 --------------------------------------------------------------
 Indexing Numpy array:
 -------------------------
