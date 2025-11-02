@@ -221,8 +221,57 @@ print(threeDarray)
 import numpy as np
 threeDarray=np.array([[[1,2,3,4],[-1,-2,-3,-4]],[[4,5,6,7],[-4,-5,-6,-7]]])
 print(threeDarray)
-print(threeDarray[0,0])
-print(threeDarray[0,1])
-print(threeDarray[1,0])
-print(threeDarray[1,1])
+print(threeDarray[0,0]) prints 1st row
+print(threeDarray[0,1])  prints 2nd row
+print(threeDarray[1,0])  prints 3rd row
+print(threeDarray[1,1])  prints 4th row
+print(threeDarray[0,1,1]) ----print -2
 -----------------------------------------------------------------------
+To iterate over numpy array:
+--------------------------------
+import numpy as np
+oneDarray=np.array([1,2,3,4])
+for i in oneDarray:
+  print(i)
+--------------------------------------
+import numpy as np
+twoDarray=np.array([[1,2,3,4],[4,5,6,7]])
+for i in twoDarray:
+  for j in i:
+    print(j)
+-------------------------------------
+import numpy as np
+threeDarray=np.array([[[1,2,3,4],[-1,-2,-3,-4]], [[4,5,6,7],[-4,-5,-6,-7]]])
+for i in threeDarray:
+  for j in i:
+    for k in j:
+      print(k) --print all element in 3d array above
+--------------------------------------------------
+zeroarray = np.zeros(10)
+print(zeroarray) --print float 0s
+zeroarray = zeroarray.astype(int)
+print(zeroarray) -print integer 0s array
+------------------------------------
+onsarray = np.ones(10)
+print(onsarray)  --print float 1s
+onsarray = onsarray.astype(int)
+print(onsarray) -print integer 1s array
+---------------------------
+To prefill some specific numbers in a array:[5 5 5 5 5 5 5 5 5 5]
+import numpy as np
+prefilledarray= np.full(10,5) ---(size,no.of.elemts)
+print(prefilledarray)
+-----------------------------------------
+These kind of wok cannot be done using python lists:
+addition of a scalar elemnt to the numpy array:
+matrix =np.array([[1,2,3],[4,5,6]])
+print(matrix)
+print(matrix+2)
+----------------------------------
+subtraction:of a scalar elemnt to the numpy array
+muliplication:of a scalar elemnt to the numpy array
+division:each element in matrix is didvded by scallar
+(/) operator for float division
+(//) operator for integer division
+-------------------------
+
