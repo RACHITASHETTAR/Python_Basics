@@ -268,10 +268,57 @@ matrix =np.array([[1,2,3],[4,5,6]])
 print(matrix)
 print(matrix+2)
 ----------------------------------
-subtraction:of a scalar elemnt to the numpy array
-muliplication:of a scalar elemnt to the numpy array
-division:each element in matrix is didvded by scallar
+subtraction:    of a scalar element to the numpy array
+muliplication: of a scalar element to the numpy array
+division: each element in matrix is divided by scalar
 (/) operator for float division
 (//) operator for integer division
+Raise to power: 
+matrix = np.array([[1,2,3],[4,5,6]])
+print(matrix **2)
+Transpose: convert rows to column or vice versa
+print(matrix.T)
+------------------------------------------
+Note:matrix 1 and matrix 2 are arrays:
+---------------------------------------
+import numpy as np
+matrix1 = np.array([[1,2,3],[4,5,6]])
+print(matrix1)
+matrix2 = np.array([[1,2,3],[-4,-5,-6]])
+print(matrix2)
+print(matrix1+matrix2)
+print(matrix1-matrix2)
+print(matrix1*matrix2)
+print(matrix1/matrix2)
+print(matrix1//matrix2)
+-----------------------------------------------
+matrix multiplication:without print function we can do multiplication
+np.matmul(matrix1,matrix2)
+np.min(matrix1)
+np.max(matrix1)
+np.sum(matrix1)
+np.mean(matrix1)
+np.std(matrix1) --finds standard deviation of an array matrix1
+np.median(matrix1)
 -------------------------
+PAndas Datastructures:
+1.Dataframe: 2D datastructure one or more row and column, pandas datframe is collection of one or more series
+2.Series: A series is a 1D datastructure, it consist of one row and column 
 
+To create a dataframe using a lists:
+myList =[['Apple','Red'],['Banana','Yellow'],['Orange','Orange']]
+myDataframe = pd.DataFrame(myList, columns=['Fruit','Color'])
+myDataframe
+----------------------------------------
+To create dataframe using numpy array(numpy array is same as list) and pandas dataframe:
+import pandas as pd
+import numy as np
+myList =np.array([[0,1],[2,3],[4,5]])
+myDataframe = pd.DataFrame(myList, columns = ['even', 'odd'])
+myDataframe
+------------------------------------------------
+
+
+To create the dataframe using the Dictonaries:
+
+Loading the CSV data into python
