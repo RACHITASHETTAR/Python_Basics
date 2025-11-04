@@ -330,7 +330,32 @@ we can load CSV files as dataframe using pandas,
 pandas.read_csv() function
 first row of the file become the column lable
 each rows of data frame will be the numerical row of pandas 
-
+--------------
+import pandas as pd
 df= pandas.read_csv('cereals.csv')
 df
 ---------------------------------------------------------
+changing index columns:this is temporary change to df
+df.set_index('name') --this will set the name column as the index column
+df
+changing index columns:this is permanentaly change to df
+df.set_index('name', inplace = True)
+df
+------------------------------------------------
+Examining the df head/Tail:
+head() function:
+Head function gives us the first 5 rows of the dataframe/series by default:
+to get more rows pass desired number in argument--
+df.head(150)
+df.head(15)
+
+To get the bottom rows tail function is used
+df.tail(7)--get 7rows from botton
+----------------------
+df[1:4] start index is 1 and end index is exclusive 4 to slice the row of dataframe 
+---------------------------------
+to get the columns or only required columns using bracket operatoes
+df['name','']
+
+-------------------------------------------
+
