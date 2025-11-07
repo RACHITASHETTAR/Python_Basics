@@ -314,14 +314,14 @@ Pandas Datastructures:
 To create a dataframe using a lists:
 myList =[['Apple','Red'],['Banana','Yellow'],['Orange','Orange']]
 myDataframe = pd.DataFrame(myList, columns=['Fruit','Color'])
-myDataframe
+print(myDataframe)
 ----------------------------------------
 To create dataframe using numpy array(numpy array is same as list) and pandas dataframe: passing list to pandas df:
 import pandas as pd
 import numy as np
 myList =np.array([[0,1],[2,3],[4,5]])
 myDataframe = pd.DataFrame(myList, columns = ['even', 'odd'])
-myDataframe
+print(myDataframe)
 ------------------------------------------------
 To create the dataframe using the Dictonaries:by passing the dictonary to pandas dataframe:
 key will become column lable and value will be assigned to rows
