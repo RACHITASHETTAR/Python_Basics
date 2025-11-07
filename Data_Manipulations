@@ -326,10 +326,10 @@ myDataframe
 To create the dataframe using the Dictonaries:by passing the dictonary to pandas dataframe:
 key will become column lable and value will be assigned to rows
 import pandas as pd
-import numy as np
-myDictonaries = {'Fruit':['apple':'banana':'orange'],'Color':['red':'yellow':'orange']}
+import numpy as np
+myDictonaries = {'Fruit':['apple','banana','orange'],'Color':['red','yellow','orange']}
 myDataframe = pd.DataFrame(myDictonaries)
-myDataframe
+print(myDataframe)
 -------------------------------------------------------------
 Loading the CSV data into python
 we can load CSV files as dataframe using pandas, 
