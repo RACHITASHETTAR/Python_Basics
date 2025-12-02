@@ -1,1 +1,4 @@
-
+select current date
+select extract(Day from current_date)
+select extract(Month from current_date)
+select extract(Year from current_date)
