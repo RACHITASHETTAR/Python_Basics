@@ -11,13 +11,18 @@ Flask is a class so Flask(__name__) creates an instance of that class, which is 
 
 from flask import Flask
 #To create Flask App:
-app = Flask(__name__) #its creating the class
-#Define a route: here app is used to define the route and then run the server.
+app = Flask(__name__) #its creating the class,the python variable that holds the name of python module
+#Define a route: here app is used to define the route and then run on the server 127.0.0.1:500
 @app.route("/")
 def hello():
   return "Hello, Flask !"
 #To run the app:
 if __name__ == '__main__':
-  app.run(debug = 'True')
+  app.run(debug = 'True') #in prod remove debug
+-----------
+to run the app.py it runs on http server 
+$python app.py
+ctrl+c to quit the app
+--------------
 
 
