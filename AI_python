@@ -13,7 +13,7 @@ from flask import Flask
 #To create Flask App:
 app = Flask(__name__) #its creating the class,the python variable that holds the name of python module
 #Define a route: here app is used to define the route and then run on the server 127.0.0.1:500
-@app.route("/")
+@app.route("/") # here / means nothing is present after ip address to add someting we can edit here in code.
 def hello():
   return "Hello, Flask !"
 #To run the app:
@@ -24,5 +24,10 @@ to run the app.py it runs on http server
 $python app.py
 ctrl+c to quit the app
 --------------
+Running on debug mode helps to restart the file.
+----------------------------
+Flask uses HTML templates:
+
+
 
 
