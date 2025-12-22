@@ -1,1 +1,23 @@
+Flask library:
+setting flask:pip install flask, 
+python -m flask --version
+python 3.12.7
+Flask 3.0.3
+Werkzeug 3.0.4
+-creating first flask route:its creating url paths:
+-----------------------------
+creat app.py file and then write the below code:
+Flask is a class so Flask(__name__) creates an instance of that class, which is your application object stored in the variable app.
+
+from flask import Flask
+#To create Flask App:
+app = Flask(__name__) #its creating the class
+#Define a route: here app is used to define the route and then run the server.
+@app.route("/")
+def hello():
+  return "Hello, Flask !"
+#To run the app:
+if __name__ == '__main__':
+  app.run(debug = 'True')
+
 
