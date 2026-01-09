@@ -1,0 +1,82 @@
+1. a = 2
+a = 4
+a = 6
+print(a + a + a) output is 18
+since variable reassign happens and finally a value is read as 6 so 6+6+6=18
+---------------------------------------------
+2. a = 1
+_a = 2
+_a2 = 3
+2a = 4
+variable name start with _ or letter not by numbers.
+-------------------------------------------
+3. a = 1
+b = 2
+print(a == b)
+False
+print(b == c)
+name error: c varaible is not defined
+---------------------------------------------
+4.Type:error can only concat str to str
+a = "1"
+b = 2
+print(a + b)
+ans:print(int(a)+b) is 3
+----------------------------------------
+sequence slice indexing:
+letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+print(letter[1]) is b
+print(letters[3:6]) ['d','e','f']
+print(letters[0:3]) ['a','b','c']
+#negative slice
+print(letters[-2]) i
+print(letters[-3:]) ['h','i','j']
+#item picking
+print(letters[::2])
+------------------------------------------------
+#range:
+my_range = range(1, 21)
+print(list(my_range))
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+------------------------------------------
+my_range = range(1, 21)
+print([10* x for x in (my_range)])
+[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
+--------------------------------------
+#To convert the items in a list to string:
+my_range = range(1, 21)
+print(list(map(str,my_range)))
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+-------------------------------------------------------
+#remove duplicates in list:
+a = ["1", 1, "1", 2]
+a = list(set(a))
+print(a)
+[1, 2, '1']
+We used a set  function to convert the list to a set that would intermediately produce {'1', 1, 2} 
+with no duplicates because set objects cannot contain duplicates. Then using list  we converted the set back to a list. 
+The drawback here is that the original order of the items is lost. 
+------------------------------------
+a = ["1", 1, "1", 2]
+b = []
+for i in a:
+    if i not in b:
+        b.append(i)
+This is another solution that would preserve the original order.
+We go through all the original list items and append them to the new list if they have not been appended before. 
+The downside of this is that the operation can take a lot of time if the list as large as we need to access both lists and perform a conditional in each iteration.
+------------------------
+Create dictonary:
+d = {"a": 1, "b": 2}
+print(d)
+2. d = dict(a = 1, b = 2)
+print(d)
+---------------------------
+d = {"a": 1, "b": 2}
+print(d['b']) --to print value of key 'b'
+----------------------------
+
+
+
+
+
