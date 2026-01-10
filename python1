@@ -403,5 +403,30 @@ else:
 print("file_processing completed")
 finally:
 print("module execution completed")
-
 --------------------------------------------------------
+Reverse string function:
+def string(text):
+    return(text[::-1])
+print(string("hello"))
+-----------------------------
+Basic Slicing Examples
+For s = "hello":
+s[0:3] gets "hel" (from index 0 up to but not including 3).
+s[:3] gets "hel" (omitting start defaults to 0).
+s[2:] gets "llo" (omitting stop goes to end).
+
+Negative Indices
+Negative indices count from the end (-1 is last character):
+s[-3:] gets "llo" (last three characters).
+s[:-3] gets "he" (up to third-from-end, excluding it).
+s[-3:0:-1] gets "lle" (from third-last backward to first, excluding 0).
+​
+
+Step Examples
+s[::2] gets "hlo" (every second character).
+s[1:5:2] gets "el" (from index 1 to 5, every second).
+s[::-1] gets "olleh" (full reverse; omit start/stop, use step -1).
+​Reverse:
+Your original s[0::-1] only gets "h" because starting at 0 with backward step can't go further left.
+-----------------------------------------------------
+
