@@ -72,11 +72,234 @@ print(d)
 2. d = dict(a = 1, b = 2)
 print(d)
 ---------------------------
+Accessing dict values:
 d = {"a": 1, "b": 2}
 print(d['b']) --to print value of key 'b'
 ----------------------------
+To calculate sum of the values of the keys:
+d = {"a": 1, "b": 2, "c": 3}
+print(d['a']+d['b'])
+-----------------------------
+d = {"Name": "John", "Surname": "Smith"}
+print(d["Smith"])
+Answer: 
+There is no key Smith  in the dictionary. Smith  is a value. You want to use Surname  if you want to access Smith :
 
+print(d["Surname"])
+Explanation: 
 
+A KeyError always means Python could not find a key with the name shown next to KeyError (e.g. Smith ).
+-------------------------------------------------
+Adding new key to dictonary:
+------------------------
+d = {"a": 1, "b": 2}
+d['c']=3
+print(d)
+--------------------------------------------------
+sum:
+d = {"a": 1, "b": 2, "c": 3}
+print(d['a']+d['b']+d['c'])
+or
+print(sum(d.values()))
+----------------------------------
+Dictionary Filtering
+d = {"a": 1, "b": 2, "c": 3}
 
+d = {"a": 1, "b": 2, "c": 3}
+d = dict((key, value) for key, value in d.items() if value <= 1)
+print(d)
+-------------------------------------------
+#formatted print:
+from pprint import pprint
+ 
+d = {"a":list(range(1, 11)), "b":list(range(11, 21)), "c":list(range(21, 31))}
+pprint(d)
 
+{'a': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+ 'b': [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+ 'c': [21, 22, 23, 24, 25, 26, 27, 28, 29, 30]}
+---------------------------------------------------
+access 13 from b dictonary:
+pprint(d['b'][2])
+----------------------------------------
+iterating dictonary:
+d = dict(a = list(range(1, 11)), b = list(range(11, 21)), c = list(range(21, 31)))
+for key,val in d.items():
+    print(key,val)
+    print(d.items())
+ans:
+a [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+b [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+c [21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+-------------------------------------------------------------------------
+ans: dict_items([('a', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), ('b', [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]), ('c', [21, 22, 23, 24, 25, 26, 27, 28, 29, 30])])
+---------------------------------------------
+To print:letters a to z
+import string
+for letter in string.ascii_lowercase:
+    print(letter)
+for letter in string.ascii_uppercase:
+    print(letter)
+-----------------------------------------------------
+To print numbers 1 to 10:
+for i in range(1,11):
+    print(i)
+-------------------------------------------
+Acceleration is velocity/time
+a=(v2-v1/t2-t1)
+
+ans:
+def acceleration(v1, v2, t1, t2):
+    a = (v2 - v1) / (t2 - t1)
+    return a
+-------------------------------------------
+Why is there an error in the code, and how would you fix it?
+
+def foo(a, b):
+    print(a + b)
+ 
+x = foo(2, 3) * 10
+------------------------------------
+for i in range(0,3):
+ if i > 1:
+    continue
+ else:
+    print(i) ans:0,1
+---------------------------- 
+def foo():
+    global c
+    c = 1 
+    return c 
+foo() 
+print(c) ans:1
+----------------------------------------------------------------------------
+Create a function that takes any string as input and returns the number of words for that string.
+string splitter:
+def count_words(strng): 
+    strng_list = strng.split() 
+    return len(strng_list) 
+ 
+print(count_words("Hey there it's me!")) ans 4
+---------------------------------------------
+def count_words(strng):
+    strng_list = strng.split()
+    return len(strng_list)
+ 
+print(count_words("A tree is a woody perennial plant, typically with branches")) ans:10
+-------------------------------
+def count_words(filepath):
+    with open(filepath, 'r') as file:
+        text = file.read()
+    text = text.replace(",", " ")
+    string_list = text.split(" ")
+    return len(string_list)
+ 
+print(count_words("words2.txt")) ans:3
+---------------------------------
+def count_words(text):
+   
+    text = text.replace(",", " ")
+    string_list = text.split(" ")
+    return len(string_list)
+ 
+print(count_words("Hi, it's me")) ans:3
+-----------------------------------------
+import math
+print(math.sqrt(9)) ans:3
+-------------------------------
+Attribute error:
+import math
+print(math.cosine(1))
+module match has no attribute cosine.
+-------------------------------------------
+import math
+print(math.pow(2))
+type error:import math
+print(math.pow(2, 3))
+ As the error suggested, you simply needed to pass a second argument so that pow  can calculate the power of the first argument.
+-----------------------------
+Print out in each line the sum of homologous items of the two sequences.
+a = [1, 2, 3]
+b = (4, 5, 6)
+for i,j in zip(a,b):
+    print(a+b)
+ans: 5,7,9
+---------------------------------------
+ Create a script that generates a file where all letters of the English alphabet are listed two in each line. The inside of the text file would look like:
+ab
+cd
+ef
+import string
+for i,j in zip(string.ascii_lowercase[0::2],string.ascii_lowercase[1::2]):
+    print(i+j)
+-----------------------------------------------------
+ Create a script that generates a file where all letters of the English alphabet are listed three in each line. The inside of the text file would look like:
+abc
+def
+ghi  soon..
+import string
+for i,j,k in zip(string.ascii_lowercase[0::3],string.ascii_lowercase[1::3],string.ascii_lowercase[2::3]):
+    print(i+j+k)
+-----------------------------------------------------------------------
+for letter in "Hello":
+    if letter == "e":
+    print(letter)
+ans:e
+------------------------------------
+age = input("What's your age?\n ")
+age_last_year = int(age) - 1
+print("Last year you were %s." % age_last_year)
+------------------------------------------
+firstname = input("Enter first name: ")
+secondname = input("Enter second name: ")
+print("Your first name is %s and your second name is %s" % firstname, secondname)
+------------------------------------------------
+Dict to JSON:
+---------------
+import json
+d = {"employees":[{"firstName": "John", "lastName": "Doe"},
+                {"firstName": "Anna", "lastName": "Smith"},
+                {"firstName": "Peter", "lastName": "Jones"}],
+"owners":[{"firstName": "Jack", "lastName": "Petter"},
+          {"firstName": "Jessy", "lastName": "Petter"}]}
+ 
+with open("company1.json", "w") as file:
+    json.dump(d, file, indent=4)
+------------------------------------------------
+Json to Dict:
+--------------
+import json
+from pprint import pprint
+ 
+with open("company1.json","r") as file:
+    d = json.loads(file.read())
+ 
+pprint(d)
+-----------------------------------------------------------------------------
+To print Hello after every 1 seconds:while loop
+-------------------
+import time
+i=0
+while True:
+    i=i+1
+    print("Hello")
+    time.sleep(i)
+------------------------------
+Break statement to stop the while loop:
+import time
+i=0
+while True:
+    i=i+1
+    print("Hello")
+    if 2>1:
+      break
+      print("hi")
+---------------------------------------
+d = dict(weather = "clima", earth = "terra", rain = "chuva")
+def vocabulary(word):
+    return d[word]
+ 
+word = input("Enter word: ")
+print(vocabulary(word))
+-----------------------------------------
 
