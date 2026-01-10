@@ -429,4 +429,7 @@ s[::-1] gets "olleh" (full reverse; omit start/stop, use step -1).
 ​Reverse:
 Your original s[0::-1] only gets "h" because starting at 0 with backward step can't go further left.
 -----------------------------------------------------
+List and dictonaries:
+list is always in same order as assigned,order will be same after every execution.
+dict: its only providing key value pairs but not the order, order will vary after every exections.
 
