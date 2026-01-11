@@ -1,0 +1,19 @@
+spark:since we have gb,tb,pb of data to process this huge data we consider parallel processing is required,
+use cpu and memory to process big data, 1.divide the data(split huge data)into chunks
+2.write a code to process this chunks.dividing data into 4 partitions,put each partition into seperate machine/workstation its costly to afford this all.
+spark does this work for us does all 4 steps 
+it run the partions on availble memory,
+if i have 1GB data: I send it to spark->spark put data into cluster->core1 and core2 on a single machine it also has memory,it has resource and manager
+worker nodes:wnode1,wnode2 number of cpu we have
+data is processed over 4 partitions
+3. aggregation of data is next task
+on colab: pip install pyspark
+ubuntu:
+pip3 install -q findspark
+import findspark
+findspark.init()
+######################################
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.master("local[*]").getorCreate()
+spark
+
