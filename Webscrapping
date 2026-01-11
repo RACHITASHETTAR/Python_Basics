@@ -1,0 +1,14 @@
+steps:
+Start → Empty list [] → Page 1 (20 items) → Page 2 (20 more) → ... → ALL data → Done
+Line-by-line breakdown:
+
+python
+data = []                    # 1. Create EMPTY shopping cart (master list)
+url = base_url              # 2. Start at page 1 URL
+
+while url:                  # 3. WHILE there's a next page:
+    response = requests.get(url)  #   - Visit current page
+    page_data = response["results"]  # - Grab THIS PAGE's items only (20 items)
+    data.extend(page_data)    # - EXTEND:Dump them into shopping cart (FLATTENS: [1,2,3])
+    url = response.get("next") # - Get NEXT page URL (or None = STOP)
+
