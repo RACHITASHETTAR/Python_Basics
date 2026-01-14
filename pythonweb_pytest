@@ -1,3 +1,58 @@
 Python identifiers: its a name given to the variable,function,class,module,object,to identify
-identifier start with letter AtoZ or atoz or underscore.
+identifier start with letter AtoZ or atoz or underscore., cannot use the conditional statments as identifier like for,if,pass,try,catch,exception etc.
 ---------------------------------------------------------
+system inputs:
+name= input("Enter ur age?")
+print(name)
+--------------------------------
+Datatypes:Python will know a is integer we dont have to declare in python
+a=20 
+xyz= "rachita"
+concatenation:
+we cannot add a to xyz as these are two different types of datatypes.
+string to string concatenation is possible.
+
+Multiple datatype declarations:
+b, c, d = 1, 1.5, "hello"
+print(b, c, d)
+print(type(b),type(c),type(d)) --> int, float, str
+--------------------------
+list,dictonary,string
+
+list =[1,1.5, "hello"]
+print(list[0]) --1
+print(list[2])-- "hello"
+
+tuple = (2, 2.5, "world")
+
+dictinary = {"key1":100,"key2":200, "name":"rachita"}
+To get the value:
+print(dictonary["key1"])
+print(dictonary["key2"])
+print(dictonary["name"])
+--------------------------------------
+logical operators in python:
+---------------------------
+a=10
+b=10.5
+c="hello"
+d="pankaj"
+e=5
+
+print(a+b)
+print(a-b)
+print(a*b)
+print(a/b)
+print(a==b)
+print(a/2==e)
+print((a==b) or (a/2==e))
+
+ANS:
+20.5
+-0.5
+105.0
+0.9523809523809523
+False
+True
+True
+
