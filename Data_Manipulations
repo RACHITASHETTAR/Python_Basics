@@ -50,6 +50,13 @@ Print even number:
 for i in range(1, 11):
     if i % 2 == 0:
         print(i)
+------------
+As a Data Engineer, you often want to store these results in a new list rather than just printing them.
+You can do this in one line using a list comprehension:
+# Multiplies even numbers by 7, keeps string for odd numbers
+processed = [i * 7 if i % 2 == 0 else "odd" for i in my_list]
+print(processed)
+# Output: [14, 'odd', 28, 'odd', 42, 'odd', 56, 'odd', 70]
 ---------------------------
 To print numbers 1 to 10
 i=1
