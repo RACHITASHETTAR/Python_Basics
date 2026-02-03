@@ -1,0 +1,109 @@
+Scripting with Python and SQL for Data Engineering --this book has basics of data scrapping:
+---------------------------
+import os
+directories = os.listdir('/Users/alferdo/code')
+print(directories) --this will give the list of items 
+To insert item inlist
+directories.insert(0,"example")
+print(directories)--this will insert the new value at 0th position
+print(directories[0])--will give 1st value in list.
+print(directories[-1])--will give last item in list.
+directories.index('scraping_Demo')
+print(directories)
+print(directories[16])
+------------------------------------
+1)whats mapping? 
+the dictonaries does a mapping with key and values and store in dictonary format.
+contact={key1:val1, kay2:val2}
+print(contact)
+2)how to request the information of the values?
+contact["key1"]
+3)whats key error?
+if any key that doesn't exist in the dictonary and its been request by the code will throw the key error.
+4.using get function we can solve this issue 
+print(contacts.get("phone"))
+now to set the fallback value if any such above key is been asked it must print this below value
+print(contacts.get("phone", "unknown")) 
+or setting to None
+print(contacts.get("phone", None)) 
+contacts.keys() --will give all keys in a dict
+contacts.values() --will give all values in dict.
+--------------------------------
+tuple:
+attribute error: if the particular attribute like append will not work for a tuple,this will throw error
+"tuple obj has no attribute append"
+read_items = ("item1","itme2")
+read_items.append()
+-------------------------------
+unique attribute:
+unique ={1,2,1,,1,3}
+print(unique.add(4))
+{1,2,3,4}
+-------------------------
+looping over list and dictirnaries:
+----
+names=[rachita,manyi,kenny,penny]
+for i in names:
+	if len(i)>5:
+		print(i)
+----------------------
+list comprehension to loop over list:
+names=['rachita','manyi','kenny','penny']
+longname=[i for i in names if len(i)>5]
+print(longname)
+-------------------------------
+looping dictornary:to get values only
+contact={'rachita':'rach@gmail.com','tommy':'tomy@gmail.com','penny':'peny@gmail.com','john':'john@gmail.com'}
+for i in contact.values():
+  print(contact)
+------------------
+keys only:
+contact={'rachita':'rach@gmail.com','tommy':'tomy@gmail.com','penny':'peny@gmail.com','john':'john@gmail.com'}
+for i in contact.keys():
+  print(contact)
+-----------------------
+to get everything:
+contact={'rachita':'rach@gmail.com','tommy':'tomy@gmail.com','penny':'peny@gmail.com','john':'john@gmail.com'}
+for key,valu in contact.items():
+  print(key,valu)
+---------------------------
+read_only = (1,2,3,4)
+unique = {1,3,2,1,1}
+for i in read_only:
+print(i)
+
+for item in unique:
+prnt(item)
+--------------------------------------
+wrking with json module: convert to string 
+-------------
+import json
+data = {"name":"rachita","data":[], valid: True}
+print(json.dumps(data)) //converts python to valid json file.
+'{"name":"rachita","data":[],"valid":"true"}'
+-------------------------------
+read string and To create a dictonary using json :
+-----------------------
+json_output = '{"name":"rachita","data":1,"valid":"true"}'
+jload_json=json.loads(json_output)
+print(type(jload_json))
+dict
+print(jload_json["vaild"])
+True
+{'name':'rachita','data':1,'valid': True}
+---------------------------------------
+
+to read the jsonfile:
+---------------------
+with open("ratings_on.json")as f:
+loaded_json = json.load(f)
+
+python datastructure to save a file:write the file it open sample_Data.json file and write the data and save the .json file
+-----------------------------
+import json 
+data = {"name":"rachita","lastname":"shettar"}
+with open("sample_data.json", "w") as f: //file opened to write the file
+json.dump(data, f)
+----------------------------------
+
+
