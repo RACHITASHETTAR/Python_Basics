@@ -2,3 +2,10 @@ select current date
 select extract(Day from current_date)
 select extract(Month from current_date)
 select extract(Year from current_date)
+---------------------------------------------
+Join/Inner join: A row in table A looks for matching records/rows in table B if there is no matching, so that data wont make it in final table creted by inner join.
+-Returns only rows where the join condition matches in both tables,
+Any row from either table without a match is excluded from the result set.
+-its a intersection oftwo tables and eleiminate the unmatched rows,helps in efficient retrieval.
+-join is same as inner join.
+
