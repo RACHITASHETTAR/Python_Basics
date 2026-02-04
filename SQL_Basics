@@ -3,6 +3,57 @@ select extract(Day from current_date)
 select extract(Month from current_date)
 select extract(Year from current_date)
 ---------------------------------------------
+FILTER data using WHERE condition:
+---------------------------------------
+= != > < operators are used to compare one column with another column.
+we can also use operators LIKE with %, regexp_like for pattern matching
+Boolean OR,AND can be used when we want to apply multiple condition.
+---------------------------------------------------------
+To find orders on particular column value completed or closed:
+Q:To get all orders with order_status equals to completed or closed.we can use IN operator.
+1. select * from table_name WHERE order_Status IN ('COMPLETED','CLOSED') LIMIT 10
+2. select * from orders WHERE order_Status = 'COMPLETED' OR order_Status = 'CLOSED' LIMIT 10
+to find total rows:
+--------------------------
+3.SELECT count(*) from orders where order_Status IN ('COMPLETED','CLOSED') LIMIT 10
+4.SELECT count(*) from orders where order_Status = 'COMPLETED' OR order_Status = 'CLOSED'
+--------------
+To find the orders on particular date:
+Q:To get all orders from month 2014 January with order_status equals to COMPLETED or CLOSED 
+SELECT * FROM orders where order_Status IN ('COMPLETED','CLOSED') AND order_date LIKE '2014-01%' LIMIT 10
+SELECT count(*) FROM orders where order_Status IN ('COMPLETED','CLOSED') AND order_date LIKE '2014-01%'
+SELECT * FROM orders where order_Status IN ('COMPLETED','CLOSED') AND date_format(order_Date, 'yyyy-MM')= '2014-01' LIMIT 10
+SELECT count(*) FROM orders where order_Status IN ('COMPLETED','CLOSED') AND date_format(order_Date, 'yyyy-MM')= '2014-01'
+--------------------
+to find the IS NULL or IS NULL values:to compare with null values
+SELECT * from students WHERE student_phone_number IS NULL
+SELECT * from students WHERE student_phone_number IS NOT NULL
+------------------------
+connect to db:
+USE Database_name
+SHOW tables
+select * from orders where order_Status  = 'COMPLETED' limit 5
+select count(*) from orders where order_Status  = 'COMPLETED'
+DROP DATABASE IF EXISTS Database_name
+CREATE DATABASE IF NOT EXISTS New_DB_name
+DROP TABLE IF EXISTS students
+CREATE TABLE SampleTable (
+    UserId INT PRIMARY KEY,
+    UserName VARCHAR(50),
+    Email VARCHAR(100),
+    CreatedAt DATETIME,
+    Status CHAR(1),
+    Credit DECIMAL(10,2),
+    IsActive BIT,
+    LastLogin DATE
+);
+-------------------------------------
+To insert the records:
+INSERT INTO students VALUES (1, 'Scott','Tiger', NULL, NULL)
+INSERT INTO students VALUES (2, 'Donald','Duck', '123567', NULL)
+INSERT INTO students VALUES (3, 'micky','Duobk', '123567', NULL)), (4, 'mouse','pduck', '123567', 'A street city some state 1234'))
+select * from students
+-----------------------------
 JOIN:will combine two tables with each other and provide the combined result.combine data horizontal,it add the rows based on types of the join we are using.
 Join/Inner join: A row in table A looks for matching records/rows in table B if there is no matching, so that data wont make it in final table creted by inner join.
 -Returns only rows where the join condition matches in both tables,
@@ -26,3 +77,19 @@ eg: if i have diff products now to findout all product belong to electronic cata
 step1: get the catogory id : select * from catagories so electronic is catogorie id=1
 now select name from products where cataogory_id =1 this gives name of products of catagory_type electronics
 -----------------------------------------------------------------------------------
+CASE statement:in sql its decision making tool same as switch statemnt
+if 1st condition is true it retun the first condition, otherwise return else part,
+if none of the case is true it will return null value.
+To get the result based on multiple condition,endas is used to print the result of our comparision
+sytax:
+SELECT 
+column_name,
+CASE
+WHEN condition1 THEN result1
+WHEN condition2 THEN result2
+ELSE default_Result
+END AS alias_name
+FROM
+table_name
+------------------------------------------------------------------------
+GROUPBY
