@@ -3,6 +3,7 @@ select extract(Day from current_date)
 select extract(Month from current_date)
 select extract(Year from current_date)
 ---------------------------------------------
+JOIN:will combine two tables with each other and provide the combined result.
 Join/Inner join: A row in table A looks for matching records/rows in table B if there is no matching, so that data wont make it in final table creted by inner join.
 -Returns only rows where the join condition matches in both tables,
 Any row from either table without a match is excluded from the result set.
@@ -24,4 +25,4 @@ UNION ALL: it will join two different queries with each other, and keep the dupl
 eg: if i have diff products now to findout all product belong to electronic catagory and all product with order quantity more than 10
 step1: get the catogory id : select * from catagories so electronic is catogorie id=1
 now select name from products where cataogory_id =1 this gives name of products of catagory_type electronics
-
+-----------------------------------------------------------------------------------
