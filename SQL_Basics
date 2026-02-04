@@ -3,7 +3,7 @@ select extract(Day from current_date)
 select extract(Month from current_date)
 select extract(Year from current_date)
 ---------------------------------------------
-JOIN:will combine two tables with each other and provide the combined result.
+JOIN:will combine two tables with each other and provide the combined result.combine data horizontal,it add the rows based on types of the join we are using.
 Join/Inner join: A row in table A looks for matching records/rows in table B if there is no matching, so that data wont make it in final table creted by inner join.
 -Returns only rows where the join condition matches in both tables,
 Any row from either table without a match is excluded from the result set.
@@ -19,7 +19,7 @@ along with null values
  records from both table( if there are rows value in left/right side but no matching or satifying condtion 
  on right  then it will assign NULL at right value vice versa)
 ------------------------------------------------------------------------
-UNION: it will join two different queries with each other, and remove the duplicates
+UNION: it will join two different queries with each other, and remove the duplicates,combine data verically, since we hae same number of columns in both queries so its vertcal
 combine the result of the queries as a single result
 UNION ALL: it will join two different queries with each other, and keep the duplicates
 eg: if i have diff products now to findout all product belong to electronic catagory and all product with order quantity more than 10
