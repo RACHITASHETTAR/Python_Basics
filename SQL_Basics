@@ -8,4 +8,20 @@ Join/Inner join: A row in table A looks for matching records/rows in table B if 
 Any row from either table without a match is excluded from the result set.
 -its a intersection oftwo tables and eleiminate the unmatched rows,helps in efficient retrieval.
 -join is same as inner join.
+--------------------------------------------------
+OUTER JOINS:
+--------------------
+OUTER JOIN/LEFT OUTER JOIN: Returns all rows from the left table, and the matching rows from the right table; if no match exists, right‑table columns are NULL
+RIGHT OUTER JOIN Returns all rows from the right table, and the matching rows from the left table; if no match exists, left‑table columns are NULL
+FULL OUTER JOIN: get all records from both table and wheater its matching(satisfy the JOIN condition) or not 
+along with null values
+ records from both table( if there are rows value in left/right side but no matching or satifying condtion 
+ on right  then it will assign NULL at right value vice versa)
+------------------------------------------------------------------------
+UNION: it will join two different queries with each other, and remove the duplicates
+combine the result of the queries as a single result
+UNION ALL: it will join two different queries with each other, and keep the duplicates
+eg: if i have diff products now to findout all product belong to electronic catagory and all product with order quantity more than 10
+step1: get the catogory id : select * from catagories so electronic is catogorie id=1
+now select name from products where cataogory_id =1 this gives name of products of catagory_type electronics
 
