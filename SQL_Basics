@@ -91,5 +91,123 @@ ELSE default_Result
 END AS alias_name
 FROM
 table_name
-------------------------------------------------------------------------
 GROUPBY
+-------------------------------------------------------
+1.Select statement: its used to select the column or multiple columns from the table
+select * from table_name
+select col1,col2 from table_name
+2.filter statement:its used to filter the data from the table
+select column from table_name where country = 'Unitedstates'
+select total_population from table_name where country = 'Unitedstates'
+select total_population from population where country = 'China'
+3.Update: updating the data in the table, run select first and then update and then validate the updated value using select statement.
+select total_population from population where country = 'United_states'
+Update population SET total_population = 345789021 where country = 'United_states'
+4.To delete a record from the table
+delete from population where country = 'Russia'
+select * from population
+5.DROP TABLE table_name
+select * from population 
+------------------------------------------------------------------------
+Aggregate functions:sum, min,maxavg,count these are the most used agg functions.
+-these functions can be used in SELECT,HAVING, ORDER BY clauses
+-max function retrns the highest value in the selected group
+MAX(columnname or expression)
+eg:select MAX(total_population) from population
+select MAX(total_population) from population WHERE total_population<25000000
+The order of execution:agg function will be executed last here,where will run first.
+cast -will basically cast the column total population as real number rather than integer
+max(round(cast(total_population AS real)/10000000, 2)) this gives the higest population
+-min retrun minimum values from the selected group
+select sum(total_population) from population
+select avg(total_population) from population
+select max(total_population) as highest_population from population
+select min(total_population) as lowest_population from population
+select avg(total_population) as avg_population from population
+select sum(total_population) as sum_population from population
+select country,total_population max(round(cast(total_population as real)/1000000, 2)) as highest_pop from population
+-------------------------
+how nulls are handled in agg func:nulls are ignored by agg function, if there are nay null values in the column values 
+so those are ignored during calculations of avg ,sum,min or max
+-if all the values are null in the column the agg functions also return null.
+-------------------------------------------------
+count function: 
+syntax: 
+count(*) or count(1) are same -it will also count the null values in column 
+count(literal value)
+count(column name)- it will exclude null values and just count the values in column
+count(expression)
+count(distinct) to get the total number of unique records
+select count(*) from population
+select count(*) from population where total_pop >1000000 
+agg are applied after where clause.
+select count(column_name) from population ->retruns the non-null counts 
+eg:select count(distinct column_name) from tablename -give count of distinct value
+select distinct column_name from tablename -provide the disctinct value.
+----------------------
+using groupby clause in select statement:
+Groupby clause is the part of the select statement, it follows the where clause if one exist,otherwise it follows from clause.
+How to use groupby clause to group the data:
+eg:if country,continent,total_population are the columns i wan to group the data based on continent 
+eg:select continent from population groupby continent-here it will remove all the repeating values in column and groupby one unique value if i have asia ,africa,america manytimes it will just print one 
+and according to this will align other columns
+eg:select continent from population where continent <> 'Asia' groupby continent --here it will exclude all values of asia continent
+filter are applied first and then groupby is applied
+-------------------------------------
+Groupped Aggregates:combination of groupby and agg functions help to get the complex reports
+note: always select the column in select clause whihc is used in groupby clause, and rest other coloumns are used in the agg function.
+select continent,count(*) as no_of_countries from population groupby continent
+-toget the total no of countries in each continent and highest population
+select continent,count(*) as total_num_countries,max(total_population) as highest_population from population groupby continent
+-in above to get the number of countries as well
+select continent,count(*) as total_num_countries,sum(total_population)as total_population from population groupby continent
+-note: donot use any other column names in the select, except the same column name used in groupby, 
+-other columns are used with the aggregate functions.
+-GROUP BY is applied on that column whihc has duplicated values , and groupby cannot be applied on any columns that has unique values eg:cannot be used for unique_id key,or country or dont have repeated values
+in column
+eg2:
+select continent,incomelevel,count(*) as no_of_Country from population group by continent,incomelevel
+note in this case if income_level is not selected in select clause the report will be meaningless
+
+HAVING:
+-having clause used only with the groupby clause,if i dont have groupby clause in my query then dont use having clause it will throw error.
+-Where condition is always executed(ordered) before the groupby clause.
+-if i want to apply any conditions after "groupby" we must used "having" clause.
+eg:select continent,count(*) as no_of_Country from population group by continent having count(*)>1 --note:here count(*) is nothing but no_of_countries column
+eg: select continent,count(*) as no_of_Country from population group by continent having sum(total_population)>6000000 AND COUNT(*)>3; --here we can use two having conditions after groupby
+----------------------------------------
+ORDER of executions:
+5.select column name
+1.from tablename
+2.where condition
+3.group by columnname
+4.having condition
+6.order by columnname
+7.limit no_of_records
+eg:select continent, 
+sum(total_pop)as total_pop from population
+where country NOT IN('india','china')
+group by continent 
+having count(*)>1 
+order by total_population DESC 
+LIMIT 1
+-------------------------------
+Advanced Subqueries- subquery is a query whihc is contained inside another query(main query)
+if its difficult to achive result using one query we use subquery
+in Select stmt i can refer to a subquery in select clause, from, where, having,
+-subquery is the one whihc is first executed
+-main query takes the output from the subquery as its input
+eg:query1:calculate avgvale of total population from table
+select avg(total_pop)from population --ans:463892020
+(main)query2:find the countries with population higher than the avgvalue thats calculated in step1 --here it takes output of step1(subquery)
+select country from population where total_pop >463892020
+subquery:
+1.select country from population where total_pop > (select avg(total_pop)from population )
+2.select country from population where total_pop = (select max(total_pop)from population )
+-----------------
+subqueries with multiple columns:here subqueries return multiple rows and columns of data
+
+--------------------------------------------
+Advanced CTE(common table expressions)
+Advanced views
+Advanced window function:
