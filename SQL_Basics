@@ -201,13 +201,78 @@ eg:query1:calculate avgvale of total population from table
 select avg(total_pop)from population --ans:463892020
 (main)query2:find the countries with population higher than the avgvalue thats calculated in step1 --here it takes output of step1(subquery)
 select country from population where total_pop >463892020
-subquery:
+-SCALAR SUBQUERY
+subquery:(scalar sub queries where sub query returns only one value)
 1.select country from population where total_pop > (select avg(total_pop)from population )
 2.select country from population where total_pop = (select max(total_pop)from population )
 -----------------
 subqueries with multiple columns:here subqueries return multiple rows and columns of data
+Types of subqueries: 1.submit subquery in where clause of main query 2.submit subquery in FROM clause,we can join two subquery using join clause,join table to subquery
+1.here sub queries return multiple rows of the data its called multiple rows/column data.
+1.multiple row return subquery
+2.multiple column return subquery
+-------------------------------------------------
+-Multiple row subquery:combine subquery using WHERE clause and IN clause
+eg1:find the population of countries,the only country of its continent among top 10 most populated countries
+step1:find those continent with just 1 country
+step2:so in final table must have nigeria and  russia as they are 1 country of a continent,with columns as country, continent and total population
+select * from population WHERE continent IN(select continent from population group by continent HAVING COUNT(*)=1)
 
+eg2:write a SELECT statement to query the table population , identify the continents with more than 1 country in this table
+select * from population where continent IN (select continent from population group by continent having count(*)>1)
+---------
+-Multiple column subquery:combine subquery using WHERE clause and IN clause
+eg1:get the population info of country with highest in each continent:
+select * from population where(continent,total_population) IN (select continent,max(totalpopulation)from from population group by continent)
+
+eg2:SELECT statement to query the table population , identify the lowest populated country in each continent
+select * from population where(continent, total_population)IN (select continent,min(total_population) from population group by continent)
+-----------------
+eg1: select country from population where continent = 'Asia' and total_population < 50000000
+step1:find all countries in asia and population
+select country,total_population from population where continent = 'Asia'
+step2:in output of step1 find only countries with population < 5000000
+select country from population where total_population < 5000000
+---------------------------------------------------------------------------------------
+-combining main query to sub-query:using FROM clause:
+----------------------------------------------------------
+eg: select country from (subquery)where total_population<5000000
+the query can be written in below two methods:both are same
+select country,total_population from (select country,total_population from population where continent = 'Asia') where total_population<5000000
+
+eg:select cntry_Asia.country,cntry_Asia.total_population from (select country,total_population from population where continent = 'Asia') cntry_Asia where cntry_Asia.total_population<5000000
+cntry_Asia this is the alias of tablename used in subquery
+-to use another sub query i can use JOIN clause
+----------------------------
+eg2:SELECT statement to query the table population and filter the result set to include only the countries in Americas and Africa,
+and only the countries with the population of over 200 million
+select * from (select * from population group by continent )where total_population>200000000 and continent in ( 'Americas','Africa')-wrong
+select * from (select * from population where total_population> 200000000 ) where continent in ('Americas','Africa') --correct ans
+select * from population where total_population> 200000000 and continent in ('Americas','Africa') --simple correct ans
+------------
+subquery-FROM clause
+-Select country,continent,total_population as cnty_population from population 
+-Select continent, SUM(total_population)AS cont_population FROM population GROUP BY continent
+joinabove two queries:
+Select cnt.country,cnt.continent,cnt.total_population as cnty_population,cont.cont_population
+from population cnt 
+JOIN (Select continent, SUM(total_population)AS cont_population 
+FROM population GROUP BY continent)cont 
+ON cnty.continent = cont.continent
 --------------------------------------------
 Advanced CTE(common table expressions)
+1. Multiple CTE
+2.Deduplication CTE
+------------------------------------
 Advanced views
 Advanced window function:
+1.OVER
+2.Partion By
+3.Order By
+4. Order By and Partition By
+5.Analytical (lag,lead)
+6.Ranking(Rank, Dense_Rank)
+7.Ranking(Row_number)
+8.Ranking(NTILE)
+9.windowframes
+10.To calculate rolling total using windowframes
