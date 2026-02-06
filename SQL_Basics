@@ -264,7 +264,6 @@ Advanced CTE(common table expressions)
 1. Multiple CTE
 2.Deduplication CTE
 ------------------------------------
-Advanced views
 Advanced window function:
 1.OVER
 2.Partion By
@@ -276,3 +275,6 @@ Advanced window function:
 8.Ranking(NTILE)
 9.windowframes
 10.To calculate rolling total using windowframes
+-------------------------------------------
+Advanced views:
+-------------------------------------------
