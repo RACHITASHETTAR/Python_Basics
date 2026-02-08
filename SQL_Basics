@@ -261,20 +261,178 @@ FROM population GROUP BY continent)cont
 ON cnty.continent = cont.continent
 --------------------------------------------
 Advanced CTE(common table expressions)
-1. Multiple CTE
-2.Deduplication CTE
+1.CTE: syntax
+with cte_continent as
+(subquery)
+mainquery
+JOIN cte_continent cont ON 
+cnty.continent = cont.continent
+---------------------------------------------
+2. Multiple CTE syntax:
+with cte_continent AS
+(subquery),
+cte_world AS
+(subquery)
+mainquery
+JOIN cte_continent cont ON 
+cnty.continent = cont.continent
+JOIN cte_world world
+example:
+with cte_continent AS
+(subquery),
+cte_world AS
+(subquery)
+SELECT cnty.country,cnty.continent,cnty.total_population AS cnty_population,cont.cont_population,world.world_population FROM population cnty
+JOIN cte_continent cont ON 
+cnty.continent = cont.continent
+JOIN cte_world world
+----------------------------------------
+3. Deduplication CTE:to remove duplication of code seen in subqueries
+
 ------------------------------------
 Advanced window function:
-1.OVER
+window function is used for complex data analysis
+-its a function that operates on a group of rows(window) and return a value for each input row based on group of rows
+-this function supports aggregate fun,ranking fun and analytical functions.
+-window function retrns every input row together with the result from the function.
+-group by: only support -agg function only.so window is better than group by.
+-aggfunctions:sum,max,min,avg,count
+-ranking functions:rank,dense_rank,row_number,NTILE
+-analytical functions:lead,lag,first_value,last_value
+------------------------------------------------------
+1.OVER:this is the function that make a function as window function without this it will be just an agg.function.
+over clause: PARTITION BY,ORDER BY,WINDOW Frame.
+eg:select company,year,quarter,volume,SUM(volume) OVER()total_Sale from sales;
 2.Partion By
 3.Order By
 4. Order By and Partition By
-5.Analytical (lag,lead)
+5.Analytical (lag,lead,first_value,last_value)
 6.Ranking(Rank, Dense_Rank)
 7.Ranking(Row_number)
 8.Ranking(NTILE)
 9.windowframes
 10.To calculate rolling total using windowframes
+-------------------------
+over clause contain first it execute partition by clause,second it runs order by clause, windowframe
+overclause makes a function an window function,
+empty over clause:lets use sum here
+eg: SUM(volume)OVER()
+this will sum the volume column and create the new column and place the values "total_sales" in the new column 
+eg:select SUM(volume) AS total_sales FROM sales;
+select company,
+year,
+quarter,
+volume,
+SUM(volume)OVER()total_sales,
+ROUND(CAST(volume AS REAL)/SUM(volume)OVER())*100,2)AS contribution_pctg
+FROM sales;
 -------------------------------------------
+PARTITION BY CLause:
+this function will partitions the data into seperate windows/groups based on the column list provided.
+sum the data based on volume and partiton the data based on year and company column.
+1st partiotn is Tesla with year 2022,and Tesla with 2023
+SUM(volume)OVER(PARTITION BY company,year)
+Q1:Analyse the quarterly sales against yearly sales:
+-----------------------------------------------------------
+-sum of the volume column will give total sales
+-'year' as partion column so for all year 2022 the sum is done on volume column and stored in yearly_Sales column,
+-year 2023 the sum is done on volume column and stored in yearly_sales column
+select company,year,quarter,volume,
+SUM(volume)OVER(PARTITION BY company) AS total_sales
+SUM(volume)OVER(PARTITION BY company,year) AS yearly_sales
+SUM(volume)OVER() AS Industry_sales
+FROM sales;
+
+Q2.using partition by and order by in over clause using rank function:
+----------------------------------------------
+1.rank sales data based on the no.of cars sold each quarter,ensure data is ranked seperately at each company and year combination.
+RANK()OVER(PARTITION BY company,year ORDER BY  volume DESC)
+-1.data is first partitioned based on year then the data is ordered in descending order,
+sales of 2022 is ranked seperately as rank 1,2,3,4
+and sales of 2023 is ranked seperately as rank 1,2,3,4. 
+-RANK() dont take any parameter its empty function,to make it window function we use over()
+q: rank the sales:the sales data is partitoned data per company,per year 
+and ranked by sales volume
+SELECT company,
+year,quarter,volume,
+RANK()OVER(Partition BY company,year ORDER BY volume DESC)AS sales_rank_per_year 
+FROM sales
+-------------------------------------------------------------------
+-here data is partitioned/grouped by year and company seperately and then applied window function on it
+step1:rank everything within the company and year col data,in descending order.
+-year 2023 the sum is done on volume column and stored in yearly_sales column
+select company,year,quarter,volume,
+RANK()OVER(PARTITION BY company,year ORDER BY volume DESC)AS sales_rank_per_year
+step2:rank the data based on company col data, in descending order.
+select company,year,quarter,volume,
+RANK()OVER(PARTITION BY company ORDER BY volume DESC)AS sales_rank_per_company
+---------------------------------------------------------
+Analytical Functions:LAG,LEAD,First_value,Last_value useful while analysing timeseries data
+---------------------------------
+LAG function:helps to access the data from previous row when we process the data for the current row
+-compare the sales volume from this month to previous month to analyse the growth of business,
+-by default it get the value from previous row change that to access the data from diff row using the "offset" parameter
+-instead of sending the NULL we can set the "Default" parameter as the data 
+-to get previous quarter sales volue LAG(volume) is used,
+select company,year,quarter,volume,
+LAG(volume)OVER(ORDER BY company,year,quarter)AS prev_vol
+volume-LAG(volume)OVER(ORDER BY company,year,quarter)AS difference
+FROM sales
+WHERE company = 'Tesla'
+-order the data based on company,year and quarter,it orders in ascending order of year and quarter
+-sort the data based on year 20222 first then 2023
+lag function:pre_volum colum is created by null first value and 
+then shift the first record of volum column to second value of pre_vol column similarly do shift it for all rows
+-analyst can check if company sales grew for that particular quarter: volume col - prev_Volum col give the difference->growth col
+-growth column will give us details if my sales is growing or declineing based on this graphs.
+-Now to assign the 0 instead of 'null' we can use another parameter in LAG function
+offset =1 if i am looking on previous records.if value is set to 4 then it will make the 4 rows in a column as 0, 
+default will replce the NULL so i am giving 0 here to replace
+LAG(columnname,offset,default)
+LEAD(volume, 4, 0)
+-------------------------------------------------------
+RANKING FUNCTIONS:RANK,DENSE_RANK,ROW_NUMBER,NTILE
+Both rank and dense rank behave in same way both assign the same rank number.
+1.diff between RANK and DENSE_RANK
+select company,
+        year,    
+        quarter,
+        volume
+RANK()OVER(PARTITION BY company, ORDER BY volume DESC)as sale_rank
+DENSE_RANK()OVER(PARTITION BY company, ORDER BY volume DESC)as sale_rank
+FROM sales
+-------------------------------------
+RANK()-function will assign the same rank to the duplicated values say 5,5 and next rank will be 7 not 6 since it will skip the rank.
+DENSE_RANK()-here the functions will the same rank to the duplicates but the next rank will be 6 here it will not skip rank.
+ROW_NUMBER() this function will not skip any ranks or assign same rank to duplicate, 
+-it assign sequence number/Unique number,even in case of duplicates.
+-rownumber is used to generate primary keys or unique keys.
+Command to insert duplicates:
+INSERT INTO sales
+(company,year,quarter,volume)
+VALUES
+('BYD',2024,'Q1',300114),
+('BYD',2024,'Q2',300114),
+('Tesla',2024,'Q1',389114),
+('Tesla',2024,'Q2',389114)
+-----------------------------------------------------
+Ranking function row number:
+using rownumber function we can remove the duplicate records:
+WITH cte_top_sales
+AS(
+SELECT company,year,quarter,volume,
+ROW_NUMBER() OVER(PARTITION BY company,year,quarter ORDER BY volume DESC)AS row_number
+FROM sales)
+SELECT * from cte_top_sales
+WHERE row_number = 1
+-----------------------------------------------------------------
+Ranking function using NTILE:this function is used to segment the data  into diff buckets
+-here we can segment the data based on sale volumes for each comapny
+select company,year,quarter,volume,
+FROM sales
+
+
+
+---------------------------------------------
 Advanced views:
 -------------------------------------------
