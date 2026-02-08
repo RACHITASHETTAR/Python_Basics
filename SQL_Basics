@@ -426,11 +426,67 @@ FROM sales)
 SELECT * from cte_top_sales
 WHERE row_number = 1
 -----------------------------------------------------------------
-Ranking function using NTILE:this function is used to segment the data  into diff buckets
--here we can segment the data based on sale volumes for each comapny
-select company,year,quarter,volume,
+Ranking function using NTILE:this function is used to segment the data into diff buckets
+- here we can segment the data based on sales volume for each comapany
+NTILE() will take the arguments inside the function where as other rank function don't take any arguments,
+so argument will be with how many segements/buckets 
+-if i want to create 2 bukets we will pass the argument NTILE(2)
+select company,
+year,
+quarter,
+volume,
+NTILE(2)OVER(PARTITION BY company ORDER BY volume DESC)AS bucket
 FROM sales
+-it will create two diff values first 4 records as value 1 and next 4 records as value 2 for each same company BYD
+-so this is how NTILE function works usually.
+-if records cant be evenly distributed among the partiton say if we use NTILE(3) and we have 8 records for company BYD
+so first 3 record will be bucket_value 1,next 3 records will be of value 2 and last two records will be value 3.
+---------------------------------------------------------------------
+Introduction to window function:(two types of window frames)
+1.ROWS
+2.RANGE
+------------------------------------------------------
+ROWS followed by a BETWEEN clause followed by
+row-1-current_row,2 n_preceding,3 n_following
+lower boundry : current row, n preceding,n following
+and upper boundery of the rows
+-rows between lowerboundry:current row and
+upper_boundry:two following rows :window frame will include 3rows:
+q1:to find rolling half yearly sales volume:
+-here we need to sum the volume(quarterly data) and half yearly data
+SELECT company,year,quarter,volume,
+SUM(volume)OVER(PARTITION BY company 
+                ORDER BY year,quarter        
+                ROWS BETWEEN CURRENT ROW AND 1 FOLLOWING)AS HALF_YEARLY_sale_volume
+FROM sales;
+--------------------------------
+SELECT company,year,quarter,volume,
+SUM(volume)OVER(PARTITION BY company 
+                ORDER BY year,quarter        
+                ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING)AS HALF_YEARLY_sale_volume
+FROM sales;
+---------------------------------------
+UNBOUNDED PRECEDING:THE FRAME includes all the rows in the window,
+in row 1 to 6,current row move from 1 to2 ,2 to 3 so on and upper boundry remains same. 
+lower boundry:1st row- CURRENT ROW
+upper boundry:6th row-UNBOUNDED FOLLOWING
+-------------------------------------------------
+CASE statement:here when its india it will output as asia in continent column,
+-when its united_States its output is americas,rest of the values are NULL.
+eg:select country,total_population
+CASE counrty
+WHEN 'india' THEN 'asia'
+WHEN 'united_States' THEN 'americas'
+ELSE 'unknown'
+END AS continent
+FROM population;
+----------------------------------------------------------
 
+
+
+
+
+-
 
 
 ---------------------------------------------
