@@ -480,15 +480,25 @@ WHEN 'united_States' THEN 'americas'
 ELSE 'unknown'
 END AS continent
 FROM population;
-----------------------------------------------------------
+------------------------------------------------------
+How to exclude duplicate values in the SQL:
+-----------------------------------------------
+1.use DISTINCT to exclude fully duplicate values
+2. use window function to exclude partially duplicate values.
+1.to view the duplicate employee name :
+-here for every employee how many time they exist.,having will further remove the counts with 1 and provide duplicate employee_name
+select employee_name,count(*) AS dup_count 
+from employee_details GROUP BY employee_name having count(*)>1
+--------------------------------------------------
+2. view duplicate region+employee combo:
+select employee_name,region count(*) AS dup_count 
+from employee_details GROUP BY region,employee_name having count(*)>1
+------------------------------------------------------
+3.view fully duplicate rows:
+select employee_name,region,salary count(*) AS dup_count 
+from employee_details GROUP BY region,employee_name,salary having count(*)>1
+--------------------------------------------------------------
 
 
 
 
-
--
-
-
----------------------------------------------
-Advanced views:
--------------------------------------------
