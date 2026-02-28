@@ -498,7 +498,315 @@ from employee_details GROUP BY region,employee_name having count(*)>1
 select employee_name,region,salary count(*) AS dup_count 
 from employee_details GROUP BY region,employee_name,salary having count(*)>1
 --------------------------------------------------------------
+WHERE operator: with only one condition:
+---------------------------------------------
+select * from population where country = 'china'
+select * from population where continent! = 'asia'
+select * from population where total_population > = 22345981
+------------------------------------------------
+BETWEEN operator:
+-------------------------------------
+select * from population where total_population BETWEEN 3000000 AND 4000000 (note fst value must be small)
+LIKE,% wildcard operators: % will pick zero , one or more characters before and after percentage charater
+-to look for country name starting with B letter
+select * from population where country LIKE 'B%'
+------------------------------------
+-to look for country name starting with Br letter
+select * from population where country LIKE 'Br%'
+-------------------------------------
+-to look for country name ending with ia letter
+select * from population where country LIKE '%ia'
+---------------------------------
+-to look for country name ending with name india and indonasia -casesestive with column name use correct lower/uppercase
+select * from population where country LIKE 'in%ia'
+------------------------------------------
+wild card :LIKE underscore: this is used to fix for only one character at the underscore eg: india, ingia are pciked by this query
+-to look for country name start with in and end with ia, we can use _ underscore character:
+select * from population where country LIKE 'in_ia'
+-to get the values like indoneshia using underscore add more underscore char in th query
+select * from population where country LIKE 'in_____ia'
+-----------
+using % and _ togeter:india,indonesia,nigeria,russia,
+select * from population where country LIKE '%i_'
+---------
+filter using: IN: within the values supplied will provide population of hese countries
+select * from population WHERE country IN ('india','china')
+----------------
+WHERE with AND clause is used if multiple conditions are used:
+-------------------
+select * from population WHERE continent = 'Asia' AND 'total_population' = 2000000
+-----------------------------------------------------
+FILTER DATA USING MULTIPLE CONDITION: WHERE, OR,OR 
+-------------------------------------------
+select * from population WHERE continent = 'Americas' OR 'total_population' > 2000000 
+combine AND ,OR
+select * from population WHERE continent = 'Asia' AND ('total_population' > 5000000 OR 'total_population' <2000000)
+--------------------------------------------
+Negative condition: not equal: <> , !=
+------------------------------------------
+select * from population WHERE country IN ('india','china')
+select * from population WHERE country NOT IN ('india','china')
+select * from population where country LIKE '%a'
+select * from population where country NOT LIKE '%a'
+----------------------------------------------
+FILTER USING UPDATE DELETE: 
+-------------------------------
+1. DELETE from population WHERE population<10000000  -after delete use secelet*from table to know the data deleted or not
+2. select * from population UPDATE population SET total_population = 3000000 WHERE country = 'United States'
+-----------------------------------------
+to convert letters to upper/lower case:
+--------------------------------------
+-select UPPER('hi i am rachita')
+select UPPER(country) from population WHERE country IN ('india','china')
+select LOWER(country) from population WHERE country IN ('india','china')
+-----------------------------------------------------
+To concat add two or more strings together:
+-------------------------------------------
+CONCAT(String1,String2,String3...)
+select concat('rachita','','shettar') --this give space while concating
+select 'rachita'||''||'shettar' --conacte same as above
+---------------------------------------
+REPLACE TRIM LTRIM RTRIM
+----------------------------------
+REPLACE: replace wherevenr oldsting is present to new string
+SELECT REPLACE('string','oldstring','newstring')--
+eg:REPLACE('rachita hello i am rachita shettar', 'rachita','priyanka')
+----------------------------
+TRIM:reomve trailing spaces,leading spaces but not within string spaces
+SELECT TRIM('   RACHITA         ')
+SELECT LTRIM('   RACHITA         ') -remove left trail space only
+SELECT RTRIM('   RACHITA         ') -remove right trail space only
+--------------
+SUBSTR, INSTR, LENGTH
+SUBSTR(STRING, START,LENGTH)
+SELECT SUBSTR('rachita shettar',4,3)
+ans: hita shettar
+SELECT SUBSTR('rachita shettar',9)
+ans shettar
+-----------------
+INSTR: it gives at what postion the string start from
+SELECT INSTR('SQL FUNDAMENTAL',FUND)
+ans:5 fund start at 5th postion
+-------------------
+length:provide lenght of string
+SELECT LENGTH('SQL FUNDAMENTAL')
+-give length of a string
+-----------------
+Math functions:to transform numerical functiions:
+ABS(number)--return a postive value always whatever number is in it
+SELECT ABS(-123) ans:123
+ROUND: round number to decimal val submitted in function
+SELECT round(123.439678,2)-round to 2 digit
+ans:123.44
+CEIL:round up to next integer->eg: select ceil(21.2) ans: 22
+FLOOR: round down to nearest int->eg: select floor(21.2) ans: 21
+SQRT(number)
+select sqrt(25) ans:5
+MOD return remider diving number by other
+select MOD(27,5) -->theremider to this division is 2
+MOD(number, divisor)
+ans:2
+----------------
+Nested function calls:
+to convert string Python fundamental with SQL FUNDAMENTAL
+step:1 replace the python by sql
+step2:convert to uppercase
+output= SELECT REPLACE('Python fundamental','Python','sql')
+select UPPER(output)
+SELECT UPPER(SELECT REPLACE('Python fundamental','Python','sql'))
+----------------------------
+CONDITIONAL FUNCTIONS:
+---------------------------
+IIF,NULLIF,IFNULL,COALESCE
+---------------------------
+returns first if condition is true else return second if condition is false
+IIF:select IIF(100=99+1,'correct','wrong')
+1.select country,total_population, IIF(total_poulation>2000000,'High','Medium')AS category FROM population
+2.select country,total_population, IIF(total_poulation>3000000,'High',IIF(total_poulation>2000000,'Medium','Low'))AS category FROM population
+-------------------------------
+CASE EXPRESSION :types
+simple case expression:
+searched CASE expressions:
+1.simple case exp:evaluate list of conditions and return the value of result based on evaluatioon 
+-here WHEN clasu is executed from top to botton if one condition is true it will not take second condition(again pick first value itself)
+------------------------------------
+simplecase expr:
+CASE selector_expression
+	WHEN match_expresion_1 THEN result_1
+	WHEN match_expresion_2 THEN result_2
+	WHEN match_expresion_3 THEN result_3
+ELSE result_this
+END	
+eg: SELECT population 
+CASE country
+WHEN 'india'THEN 'asia'
+WHEN 'china'THEN 'asia'
+WHEN 'us'THEN 'america'
+WHEN 'indonesia'THEN 'asia'
+ELSE 'unknown'
+END AS continent
+FROM population
+-------------------
+searched case expression:
+SELECT total_population,country
+CASE 
+WHEN total_population > 250000000000
+THEN 'high'
+WHEN total_population > 150000000000
+THEN 'med'
+WHEN total_population <= 150000000000
+THEN 'low'
+END AS CATEGORY
+FROM population
+-----------------------
+NULLS:missing data from column is null
+empty values in data is null,if we dont know value we cannot make it zero
+including zero will lead to wrong calculations when we want to divde the values
 
+to select only null values use below query:
+select * from population where total_population IS NULL
+-----------------
+to insert the null as value in column data:
+INSERT INTO population(country,continent,total_pop)VALUES('india','asia',123671),('nigeria','africa',NULL)--note not use '' for null insert
+--------------
+-UPDATE population SET CONTINENT = NULL 
+WHERE country = 'Russia'
+---------------
+IFNULL(parm1,parm2):if parm1 is null it will return parm2
+select IFNULL('test1','first') ans:test1
+select country,continent IFNULL(total_population,'unknown') AS total_population from population
+select country,continent IFNULL(total_population1,'total_population2') AS total_population from population
+---------------
+COALESCE:unless ifnull it allow to select more than 2 parameters,it return first non null value
+select COALESCE(NULL,NULL,200,300)  ans:200
+select COALESCE(100,NULL,200,300) ans:100
+-Here if any of the column data is missing it take from another column and put it to tot_population
+select country,continent,total_population1, total_population2, total_population3
+ COALESCE(total_population1, total_population2, total_population3) AS total_population from population
+---------------
+NULLIF take 2parm if value is null both param are null else return first val
+-BELOW EXAMPLE: if value is zero it will return null 
+SELECT NULLIF(100,200)
+returns 100
+select country,continent NULLIF(total_population,0) AS total_population from population
+------------
+AGGREGATE FUNCTION AND NULL
+it shows how nulls are handled using agg functions:
+MAX MIN SUM AVG COUNT:add column values, find max of column value,min of col value
+-to find the avg of the column value we need to know the nulls first 
+then division will be done excluding nulls
+select MAX(total_population)from population
+select MIN(total_population) from population
+select SUM(total_population) from population
+select avg(cast(totl_poplation as REAL)/1000000)as lowest_poplation
+select round(avg(cast(totl_poplation as REAL)/1000000,2))as lowest_poplation
+COUNT function:agg using count function
+-count return total number of records in selected group
+count(*)-WILL INCLUDE NULL VALUE
+count(col_name)-will ignore null value
+count(literal_val)-will include null value
+count(expression)
+count(distinct)-total num of unique records and remove duplicates
+1.using where clause 
+select count(*) from population WHERE total_population > 250000000000
+AGGREGATE FUNCTION -COUNT
+SELECT COUNT(COUNTRY)FROM POPULATION
+SELECT COUNT(1)FROM POPULATION 
+AGGREGATE FUNCTION -COUNT DISTINCT
+select count(distinct continent) from population
+select distinct continent from population --will give values not counts
+---------------
+GROUP BY and AGG are used when we have more than one record in a group
+to agg data based on groups:
+eg: total score of each student
+2.total population of each continent
+3. no of items purchased by each customer
+------------------------
+-groupnames will be always unique no duplicates so it return unique record
+-filter applied first in groupby
+select column name 
+from tablename 
+where condition
+group by column name
+having condition
+order by column name
+limit numberof records
+-when we do 
+select continent from population group by continent
+select continent from population WHEN continent <> 'ASIA' group by continent
+select continent,count(*)as no_of_continent from population group by continent
+select continent,count(*)as no_of_continent,MAX(total_population) AS highest_population  from population group by continent
+select continent,count(*)as no_of_continent,SUM(total_population) AS total_population  from population group by continent
+select continent,count(*)as no_of_continent,income_level  from population group by continent,income_level
+--------------------
+GROUPING RECORDS
+GROUPED AGGREGATES
+HAVING CLAUSE:is used next to group by clause, to apply filter on grouped columns use having clause
+select continent,count(*)as no_of_continent from population group by continent HAVING count(*)>1
+multiple condition on having clause:
+select continent,count(*)as no_of_countries,SUM(total_pop)AS total_pop from population group by continent HAVING SUM(total_pop)>2000000 AND count(*)>3
+--------------------------
+ORDER OF EXECUTION
+select --5
+from --1
+where --2
+group by --3
+having--4
+order by --6
+limit--7
+----------------
+ADVANCED CTEs:all three are same clause below
+CTEs clause,
+subquery factoring clause,
+WITH clause
+-if i have more than 1 sub queries in my query CTEs are used
+-all sub queries are converted into common table expression(CTE) and treat then as table
+------------------------
+alias:population table as county
+alias:cte table as cont
+alias : cte_world table as word
+---------------------
+with cte_contint AS
+(SELECT continent,SUM(total_population)AS cont_population FROM population GROUP BY continent)      
+SELECT county.country,county.continent,county.total_population county.cont_population FROM population county
+JOIN cte_contint cont
+ON (county.continent=cont.continent)
+JOIN cte_world world
+
+using multiple CTEs:
+---------------------
+adding more than 1 cte to the query:
+with cte_contint AS
+(SELECT continent,SUM(total_population)AS cont_population FROM population GROUP BY continent)   ,
+cte_world AS (SELECT SUM(total_population)AS world_population FROM population)
+SELECT county.country,county.continent,county.total_population, county.cont_population,world.world_population
+FROM population county
+JOIN cte_contint cont
+ON (county.continent=cont.continent)
+JOIN cte_world world
+-------------------
+ADVANCED WINDOW FUNCTIONS:
+-------------------------
+windowfunctions:
+OVER() clause:its a window function
+PARTITION BY() clause
+ORDER BY() clause
+PARTITION BY() AND ORDER BY() clause -together
+rank()over(order by volume desc)
+Rank()over(partition by company,year order by volume decs)
+-----------------------
+Analytics functions:
+lag lead firstval last val
+lag:put first value as null followed by other values applied next row in new column
+diffrenece is calculated colun1-column2
+Ranking functions:
+RANK AND DENSE_RANK(): both are used to rank data
+-if a value is duplicate rank and dense rank will assign same rank to duplicate value 
+rank(): if i have 3 duplicate  it assign 5,5,5 and next value rank will be 8 not 6
+dense_rank(): if i have 3 duplicate  it assign 5,5,5 and next value rank will be 6
+ROW_NUMBER():its a incremental number will not repeat the rank even if it find duplicates 
+its continuse series numbers assigned to the volume coulmn
+---------------------------------------------------
 
 
 
